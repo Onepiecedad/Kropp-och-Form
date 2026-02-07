@@ -55,7 +55,7 @@ const Navbar = () => {
   return (
     <nav className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
       <div className="container nav__inner">
-        <a href="#" className="nav__brand">Kropp &amp; Form</a>
+        <a href="#" className="nav__brand" aria-label="Hem"></a>
         <ul className="nav__links">
           <li><a href="#services" className="nav__link">Behandlingar</a></li>
           <li><a href="#about" className="nav__link">Om Oss</a></li>
@@ -68,6 +68,20 @@ const Navbar = () => {
 };
 
 /* ═══════════════════════════════
+   FLOATING 3D LOGO
+   ═══════════════════════════════ */
+const FloatingLogo = () => (
+  <div className="logo3d">
+    <div className="logo3d__glow" />
+    <div className="logo3d__disc">
+      <span className="logo3d__initials">KF</span>
+      <span className="logo3d__script">Kropp &amp; Form</span>
+      <span className="logo3d__tagline">Massage · Wellness</span>
+    </div>
+  </div>
+);
+
+/* ═══════════════════════════════
    HERO
    ═══════════════════════════════ */
 const Hero = () => (
@@ -75,6 +89,10 @@ const Hero = () => (
     <div className="hero__bg" />
     <div className="hero__vignette" />
     <div className="hero__gradient" />
+
+    <div className="hero__logo-area">
+      <FloatingLogo />
+    </div>
 
     <div className="container hero__content">
       <span className="label hero__eyebrow">Massage · Wellness · Friskvård</span>
@@ -93,10 +111,7 @@ const Hero = () => (
 
     <div className="hero__vertical">Tyringe · Sweden</div>
 
-    <div className="hero__scroll">
-      <span>Scroll</span>
-      <ArrowDown size={14} />
-    </div>
+
   </section>
 );
 
@@ -156,28 +171,28 @@ const treatments = [
     time: "25 min",
     price: "500 kr",
     desc: "En djupgående behandling anpassad för rygg, skulderblad och nacke. Fokuserar på spänningshuvudvärk och muskulär trötthet.",
-    img: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1974"
+    img: "/kroppochformmassage1.jpg"
   },
   {
     title: "Massagebehandling",
     time: "40 min",
     price: "650 kr",
     desc: "En fokuserad behandling som utförs utifrån dina individuella behov. Perfekt för specifika problemområden.",
-    img: "https://images.unsplash.com/photo-1610492421943-47e06899753c?q=80&w=2070"
+    img: "/kroppochformmassage2.jpg"
   },
   {
     title: "Helkroppsmassage",
     time: "60 min",
     price: "750 kr",
     desc: "Den ultimata återhämtningen för hela kroppen. Löser upp spänningar från topp till tå och ger ny energi.",
-    img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2070"
+    img: "/kroppochformmassage3.jpg"
   },
   {
     title: "Hot Stone Massage",
     time: "60 min",
     price: "795 kr",
     desc: "Värmande massage med lena lavastenar och essentiella oljor. Ger en djupare avslappning för både kropp och själ.",
-    img: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070"
+    img: "/kroppochformhotstone.jpg"
   }
 ];
 
