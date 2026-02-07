@@ -199,6 +199,24 @@ const Services = () => (
 );
 
 /* ═══════════════════════════════
+   PARALLAX INTERLUDE
+   ═══════════════════════════════ */
+const ParallaxInterlude = () => (
+  <section className="parallax reveal">
+    <div className="parallax__bg" />
+    <div className="parallax__overlay" />
+    <div className="parallax__content">
+      <div className="parallax__accent" />
+      <p className="parallax__quote">
+        Att ta hand om din kropp är inte lyx —<br />
+        det är en nödvändighet.
+      </p>
+      <span className="parallax__attribution">Kropp &amp; Form Filosofi</span>
+    </div>
+  </section>
+);
+
+/* ═══════════════════════════════
    INFO SECTION
    ═══════════════════════════════ */
 const InfoSection = () => (
@@ -300,6 +318,7 @@ const App = () => {
       <Hero />
       <Philosophy />
       <Services />
+      <ParallaxInterlude />
       <InfoSection />
       <Footer />
     </div>

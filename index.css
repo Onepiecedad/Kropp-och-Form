@@ -638,6 +638,96 @@ ol {
   transform: translateX(4px);
 }
 
+/* ═══ PARALLAX INTERLUDE ═══ */
+.parallax {
+  position: relative;
+  height: clamp(50vh, 60vh, 70vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.parallax__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=2070');
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  filter: brightness(0.35) contrast(1.1) saturate(0.7);
+}
+
+/* Mobile fallback: iOS doesn't support background-attachment: fixed well */
+@supports (-webkit-touch-callout: none) {
+  .parallax__bg {
+    background-attachment: scroll;
+    filter: brightness(0.3) contrast(1.1) saturate(0.7);
+  }
+}
+
+.parallax__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+      rgba(31, 42, 48, 0.6) 0%,
+      rgba(79, 127, 147, 0.15) 50%,
+      rgba(31, 42, 48, 0.6) 100%);
+  z-index: 1;
+}
+
+.parallax__content {
+  position: relative;
+  z-index: 10;
+  max-width: 640px;
+  padding: 3rem 2.5rem;
+  border-radius: 20px;
+  text-align: center;
+
+  /* Glassmorphism */
+  background: rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.8s var(--ease-expo);
+}
+
+.parallax__content:hover {
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transform: translateY(-4px);
+}
+
+.parallax__accent {
+  width: 40px;
+  height: 2px;
+  background: var(--primary);
+  margin: 0 auto 2rem;
+  border-radius: 2px;
+}
+
+.parallax__quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  line-height: 1.5;
+  color: var(--text-on-dark);
+  margin-bottom: 1.5rem;
+}
+
+.parallax__attribution {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
 /* ═══ INFO ═══ */
 .info {
   padding: clamp(4rem, 8vw, 6rem) 0;
