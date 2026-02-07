@@ -61,7 +61,7 @@ const Navbar = () => {
           <li><a href="#about" className="nav__link">Om Oss</a></li>
           <li><a href="#contact" className="nav__link">Kontakt</a></li>
         </ul>
-        <a href="#contact" className="btn btn--copper">Boka Tid</a>
+        <a href="#contact" className="btn btn--primary">Boka Tid</a>
       </div>
     </nav>
   );
@@ -86,7 +86,7 @@ const Hero = () => (
         Låt oss hjälpa dig att hitta balans, återhämtning och välmående.
       </p>
       <div className="hero__actions">
-        <a href="#contact" className="btn btn--copper">Boka Tid</a>
+        <a href="#contact" className="btn btn--primary">Boka Tid</a>
         <a href="#services" className="btn btn--ghost">Våra Behandlingar</a>
       </div>
     </div>
