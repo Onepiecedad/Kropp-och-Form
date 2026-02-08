@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   Phone,
@@ -15,9 +15,29 @@ import {
   MessageSquare,
   ChevronUp,
   Menu,
-  X
+  X,
+  Calendar,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Loader2
 } from 'lucide-react';
 import './index.css';
+import { supabase, getServices, getBusinessHours, type Service, type BusinessHours } from './supabaseClient';
+import BookingPage from './BookingPage';
+
+/* ═══════════════════════════════
+   HASH ROUTING HOOK
+   ═══════════════════════════════ */
+const useHash = () => {
+  const [hash, setHash] = useState(window.location.hash);
+  useEffect(() => {
+    const onHashChange = () => setHash(window.location.hash);
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+  return hash;
+};
 
 /* ═══════════════════════════════
    SCROLL REVEAL HOOK
@@ -79,7 +99,7 @@ const Navbar = () => {
             <li><a href="#about" className="nav__link">Om Oss</a></li>
             <li><a href="#contact" className="nav__link">Kontakt</a></li>
           </ul>
-          <a href="#contact" className="btn btn--primary nav__cta-desktop">Boka Tid</a>
+          <a href="#/boka" className="btn btn--primary nav__cta-desktop">Boka Tid</a>
           <button
             className="nav__hamburger"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -97,7 +117,7 @@ const Navbar = () => {
           <a href="#services" className="mobile-menu__link" onClick={closeMenu}>Behandlingar</a>
           <a href="#about" className="mobile-menu__link" onClick={closeMenu}>Om Oss</a>
           <a href="#contact" className="mobile-menu__link" onClick={closeMenu}>Kontakt</a>
-          <a href="#contact" className="btn btn--primary mobile-menu__cta" onClick={closeMenu}>Boka Tid</a>
+          <a href="#/boka" className="btn btn--primary mobile-menu__cta" onClick={closeMenu}>Boka Tid</a>
         </div>
       </div>
     </>
@@ -263,6 +283,7 @@ const Services = () => (
     </div>
   </section>
 );
+
 
 /* ═══════════════════════════════
    PARALLAX INTERLUDE
@@ -621,6 +642,12 @@ const ScrollToTop = () => {
    ═══════════════════════════════ */
 const App = () => {
   const appRef = useScrollReveal();
+  const hash = useHash();
+
+  // Dedicated booking page
+  if (hash === '#/boka') {
+    return <BookingPage />;
+  }
 
   return (
     <div ref={appRef}>
