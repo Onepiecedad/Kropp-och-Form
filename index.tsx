@@ -13,7 +13,9 @@ import {
   Mail,
   User,
   MessageSquare,
-  ChevronUp
+  ChevronUp,
+  Menu,
+  X
 } from 'lucide-react';
 import './index.css';
 
@@ -51,6 +53,7 @@ const useScrollReveal = () => {
    ═══════════════════════════════ */
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -58,18 +61,46 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <nav className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
-      <div className="container nav__inner">
-        <a href="#" className="nav__brand" aria-label="Hem"></a>
-        <ul className="nav__links">
-          <li><a href="#services" className="nav__link">Behandlingar</a></li>
-          <li><a href="#about" className="nav__link">Om Oss</a></li>
-          <li><a href="#contact" className="nav__link">Kontakt</a></li>
-        </ul>
-        <a href="#contact" className="btn btn--primary">Boka Tid</a>
+    <>
+      <nav className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
+        <div className="container nav__inner">
+          <a href="#" className="nav__brand" aria-label="Hem">Kropp &amp; Form</a>
+          <ul className="nav__links">
+            <li><a href="#services" className="nav__link">Behandlingar</a></li>
+            <li><a href="#about" className="nav__link">Om Oss</a></li>
+            <li><a href="#contact" className="nav__link">Kontakt</a></li>
+          </ul>
+          <a href="#contact" className="btn btn--primary nav__cta-desktop">Boka Tid</a>
+          <button
+            className="nav__hamburger"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? 'Stäng meny' : 'Öppna meny'}
+            aria-expanded={menuOpen}
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile menu overlay */}
+      <div className={`mobile-menu ${menuOpen ? 'mobile-menu--open' : ''}`}>
+        <div className="mobile-menu__content">
+          <a href="#services" className="mobile-menu__link" onClick={closeMenu}>Behandlingar</a>
+          <a href="#about" className="mobile-menu__link" onClick={closeMenu}>Om Oss</a>
+          <a href="#contact" className="mobile-menu__link" onClick={closeMenu}>Kontakt</a>
+          <a href="#contact" className="btn btn--primary mobile-menu__cta" onClick={closeMenu}>Boka Tid</a>
+        </div>
       </div>
-    </nav>
+    </>
   );
 };
 
@@ -596,6 +627,7 @@ const App = () => {
       <Navbar />
       <main>
         <Hero />
+        <Testimonials />
         <Philosophy />
         <Services />
         <Benefits />
@@ -612,7 +644,6 @@ const App = () => {
             <span className="parallax__attribution">Patrik Tysper</span>
           </div>
         </section>
-        <Testimonials />
         <ContactForm />
         <InfoSection />
       </main>
