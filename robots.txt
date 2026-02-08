@@ -1,0 +1,5 @@
+# Kropp & Form — robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://kroppochform.se/sitemap.xml
